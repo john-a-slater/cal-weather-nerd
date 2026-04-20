@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSSKI Snow Depth Max Comparison (April 17)</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --bar: #0f766e;
+      --bar-soft: #c6f1ed;
+      --missing: #9ca3af;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, #dff7f3 0, transparent 40%),
+        radial-gradient(circle at 100% 100%, #e5ecff 0, transparent 45%),
+        var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+    }
+
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #0b4d48;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.96rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th { color: var(--muted); font-weight: 600; }
+
+    .chart {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(64px, 1fr));
+      gap: 14px;
+      align-items: end;
+      min-height: 280px;
+      margin-top: 6px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .bar-col {
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+      align-items: end;
+      min-height: 245px;
+    }
+
+    .bar-wrap {
+      width: min(80px, 100%);
+      height: 220px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: linear-gradient(to top, #f8fafc, #ffffff);
+    }
+
+    .bar {
+      width: 100%;
+      background: linear-gradient(to top, var(--bar), #14b8a6);
+      border-top: 1px solid rgba(15, 118, 110, 0.4);
+      transition: height 0.7s ease;
+      min-height: 0;
+    }
+
+    .bar.missing {
+      height: 100% !important;
+      background: repeating-linear-gradient(
+        45deg,
+        #f0f2f5,
+        #f0f2f5 8px,
+        #d1d5db 8px,
+        #d1d5db 16px
+      );
+      border-top: 1px solid #d1d5db;
+    }
+
+    .val {
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .year {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      .chart { gap: 8px; }
+      .bar-wrap { height: 180px; }
+      .bar-col { min-height: 205px; }
+      th, td { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>MSSKI Snow Depth: Max on April 17</h1>
+      <p class="sub">Comparison for 2022 through 2026 from station MSSKI day files.</p>
+    </section>
+
+    <section class="card">
+      <h2>Max Values Section</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Max Snow Depth (in)</th>
+            <th>Source File</th>
+          </tr>
+        </thead>
+        <tbody id="max-table"></tbody>
+      </table>
+      <p class="note">2023 returned no observation rows for this date from MesoWest.</p>
+    </section>
+
+    <section class="card">
+      <h2>Bar Chart</h2>
+      <div id="chart" class="chart"></div>
+      <p class="note">Bars are scaled to the highest available value (160.2 in in 2024). Missing data is shown with a striped bar.</p>
+    </section>
+  </main>
+
+  <script>
+    const rows = [
+      { year: 2022, maxSnow: 54.24, file: "MSSKI_04-17-2022.csv" },
+      { year: 2023, maxSnow: null, file: "MSSKI_04-17-2023.csv" },
+      { year: 2024, maxSnow: 160.2, file: "MSSKI_04-17-2024.csv" },
+      { year: 2025, maxSnow: 149.7, file: "MSSKI_04-17-2025.csv" },
+      { year: 2026, maxSnow: 63.04, file: "MSSKI_04-17-2026.csv" }
+    ];
+
+    const maxValue = Math.max(...rows.filter(r => r.maxSnow !== null).map(r => r.maxSnow));
+
+    const tableBody = document.getElementById("max-table");
+    const chart = document.getElementById("chart");
+
+    rows.forEach(row => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${row.year}</td>
+        <td>${row.maxSnow === null ? "N/A" : row.maxSnow.toFixed(2)}</td>
+        <td><code>${row.file}</code></td>
+      `;
+      tableBody.appendChild(tr);
+
+      const pct = row.maxSnow === null ? 100 : Math.max(3, (row.maxSnow / maxValue) * 100);
+      const valLabel = row.maxSnow === null ? "N/A" : `${row.maxSnow.toFixed(2)}"`;
+
+      const col = document.createElement("div");
+      col.className = "bar-col";
+      col.innerHTML = `
+        <div class="val">${valLabel}</div>
+        <div class="bar-wrap">
+          <div class="bar ${row.maxSnow === null ? "missing" : ""}" style="height: ${pct}%"></div>
+        </div>
+        <div class="year">${row.year}</div>
+      `;
+      chart.appendChild(col);
+    });
+  </script>
+</body>
+</html>
