@@ -183,19 +183,19 @@
   <main class="app">
     <section class="card">
       <h1>Snow Chart Date Scrubber</h1>
-      <p class="sub">Drag the slider to scrub date-by-date from Oct 1 to Apr 30 and inspect bar changes manually.</p>
+      <p class="sub">Drag the slider to scrub date-by-date from Oct 14 to Apr 30 and inspect bar changes manually.</p>
       <div class="toolbar">
         <label>Location
           <select id="dataset">
             <option value="tahoe">Tahoe/Donner (CSSL)</option>
-            <option value="msski">Mt. Shasta (MSSKI)</option>
+            <option value="msski" selected>Mt. Shasta (MSSKI)</option>
             <option value="sonora">Sonora Pass (SRAC1)</option>
           </select>
         </label>
         <label>Label Mode
           <select id="labelMode">
             <option value="calendar">Calendar Year</option>
-            <option value="snow">Snow Year</option>
+            <option value="snow" selected>Snow Year</option>
           </select>
         </label>
         <label>Year Set
@@ -251,7 +251,7 @@
 
     function seasonDays() {
       const out = [];
-      const start = new Date(2023, 9, 1);
+      const start = new Date(2023, 9, 14);
       const end = new Date(2024, 3, 30);
       for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
         out.push({ month: d.getMonth() + 1, day: d.getDate(), label: `${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}` });
