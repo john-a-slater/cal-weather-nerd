@@ -88,9 +88,122 @@
       background: linear-gradient(180deg, var(--btn2), var(--btn1));
       box-shadow: 0 8px 18px rgba(15, 127, 147, 0.28);
     }
+  
+    .site-nav {
+      max-width: 1150px;
+      margin: 0 auto 14px;
+      padding: 10px 12px;
+      border: 1px solid var(--line, #d8e2f0);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, .08);
+      backdrop-filter: blur(6px);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .site-nav a {
+      text-decoration: none;
+      color: var(--ink, #152136);
+      font-size: .9rem;
+      font-weight: 600;
+      border: 1px solid var(--line, #d8e2f0);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #f8fbff;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    .site-nav a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(15, 23, 42, .12);
+      background: #eef7ff;
+    }
+
+  
+
+    /* mobile-polish-2026 */
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
+
+      main,
+      .app,
+      .wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .site-nav {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 8px;
+        gap: 6px;
+      }
+
+      .site-nav a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        font-size: 0.84rem;
+        padding: 8px 11px;
+      }
+
+      .hero,
+      .card {
+        border-radius: 14px;
+      }
+
+      .toolbar {
+        gap: 8px;
+      }
+
+      select,
+      button,
+      input[type=range] {
+        min-height: 42px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .chart {
+        grid-template-columns: repeat(auto-fit, minmax(58px, 1fr));
+        gap: 6px;
+      }
+
+      .barbox {
+        height: 160px;
+      }
+
+      table {
+        font-size: 0.88rem;
+      }
+
+      th,
+      td {
+        padding: 7px 5px;
+      }
+    }
+
   </style>
 </head>
 <body>
+
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="./index.html">Home</a>
+    <a href="./snow_depth_explorer.html">Shasta Explorer</a>
+    <a href="./tahoe_donner_explorer.html">Tahoe/Donner Explorer</a>
+    <a href="./sonora_pass_explorer.html">Sonora Explorer</a>
+    <a href="./chart_animation_player.html">Animator</a>
+    <a href="./chart_date_scrubber.html">Date Scrubber</a>
+    <a href="./snow_depth_apr17_comparison.html">April 17 Comparison</a>
+  </nav>
+
   <main>
     <h1>Snow Depth Explorer</h1>
     <p>Choose a location to compare snow depth by date, with both calendar year and snow year views.</p>
@@ -118,6 +231,13 @@
         <h2 class="title">Date Scrubber</h2>
         <p class="desc">Manually drag through Oct 1 to Apr 30 and inspect each daily frame.</p>
         <a class="btn" href="./chart_date_scrubber.html">Open Date Scrubber</a>
+      </article>
+    
+
+      <article class="card">
+        <h2 class="title">Sonora Pass (SRAC1)</h2>
+        <p class="desc">Daily comparison explorer for Sonora Pass at 8772' elevation.</p>
+        <a class="btn" href="./sonora_pass_explorer.html">Open Sonora Pass Explorer</a>
       </article>
     </section>
   </main>

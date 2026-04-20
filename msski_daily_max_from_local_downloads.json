@@ -1,0 +1,102 @@
+[
+  {
+    "date": "2022-04-10",
+    "year": 2022,
+    "month": 4,
+    "day": 10,
+    "max_snow_in": 34.62,
+    "sample_count": 24,
+    "status": "ok",
+    "source_file": "MSSKI_04-10-2022.csv"
+  },
+  {
+    "date": "2022-04-17",
+    "year": 2022,
+    "month": 4,
+    "day": 17,
+    "max_snow_in": 54.24,
+    "sample_count": 24,
+    "status": "ok",
+    "source_file": "MSSKI_04-17-2022.csv"
+  },
+  {
+    "date": "2023-04-10",
+    "year": 2023,
+    "month": 4,
+    "day": 10,
+    "max_snow_in": 200.4,
+    "sample_count": 15,
+    "status": "ok",
+    "source_file": "MSSKI_04-10-2023.csv"
+  },
+  {
+    "date": "2023-04-17",
+    "year": 2023,
+    "month": 4,
+    "day": 17,
+    "max_snow_in": null,
+    "sample_count": 0,
+    "status": "no_data",
+    "source_file": "MSSKI_04-17-2023.csv"
+  },
+  {
+    "date": "2024-04-10",
+    "year": 2024,
+    "month": 4,
+    "day": 10,
+    "max_snow_in": 166.4,
+    "sample_count": 24,
+    "status": "ok",
+    "source_file": "MSSKI_04-10-2024.csv"
+  },
+  {
+    "date": "2024-04-17",
+    "year": 2024,
+    "month": 4,
+    "day": 17,
+    "max_snow_in": 160.2,
+    "sample_count": 24,
+    "status": "ok",
+    "source_file": "MSSKI_04-17-2024.csv"
+  },
+  {
+    "date": "2025-04-10",
+    "year": 2025,
+    "month": 4,
+    "day": 10,
+    "max_snow_in": 164.0,
+    "sample_count": 23,
+    "status": "ok",
+    "source_file": "MSSKI_04-10-2025.csv"
+  },
+  {
+    "date": "2025-04-17",
+    "year": 2025,
+    "month": 4,
+    "day": 17,
+    "max_snow_in": 149.7,
+    "sample_count": 24,
+    "status": "ok",
+    "source_file": "MSSKI_04-17-2025.csv"
+  },
+  {
+    "date": "2026-04-10",
+    "year": 2026,
+    "month": 4,
+    "day": 10,
+    "max_snow_in": 48.16,
+    "sample_count": 23,
+    "status": "ok",
+    "source_file": "MSSKI_04-10-2026.csv"
+  },
+  {
+    "date": "2026-04-17",
+    "year": 2026,
+    "month": 4,
+    "day": 17,
+    "max_snow_in": 63.04,
+    "sample_count": 24,
+    "status": "ok",
+    "source_file": "MSSKI_04-17-2026.csv"
+  }
+]
